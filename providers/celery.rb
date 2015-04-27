@@ -103,11 +103,9 @@ action :before_deploy do
         end
       end
       ## We added this block to allow us to alter the default process_name and numprocs for
-      ## haystack-celerd. This is the reason we are forking this cookbook.
-      if "#{new_resource.application.name}-#{type}".eql?("haystack-celeryd")
-        process_name '%(program_name)s_%(process_num)02d'
-        numprocs 6
-      end
+      ## haystack-celeryd. This is the reason we are forking this cookbook.
+      process_name ApplicationPython::Celery.celery_proc_name("#{new_resource.application.name}-#{type}")
+      numprocs ApplicationPython::Celery.celery_procs(node, "#{type}")
       directory ::File.join(new_resource.path, "current")
       autostart false
       user new_resource.owner
