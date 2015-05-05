@@ -1,11 +1,11 @@
 module ApplicationPython
   module Celery
     class << self
-      def celery_procs(node, type)
+      def celery_procs(node, app_name)
         case
-        when node.role?('haystack-celeryd-utility') && type.eql?('celeryd')
+        when node.role?('haystack-celeryd-utility') && app_name.eql?('haystack-celeryd')
           2
-        when node.role?('haystack-celeryd') && type.eql?('celeryd')
+        when app_name.eql?('haystack-celeryd')
           6
         else
           1
