@@ -70,9 +70,9 @@ action :before_deploy do
   if new_resource.celeryd
     case new_resource.queues
     when Array
-      cmds[:celeryd] = "celeryd -Q #{new_resource.queues.join(',')} #{new_resource.enable_events ? "-E" : ""}"
+      cmds[:celeryd] = "celeryd -Q #{new_resource.queues.join(',')} #{new_resource.enable_events ? "-E" : ""} -n w%(process_num)02d.%(host_node_name)s"
     when NilClass
-      cmds[:celeryd] = "celeryd #{new_resource.enable_events ? "-E" : ""}"
+      cmds[:celeryd] = "celeryd #{new_resource.enable_events ? "-E" : ""} -n w%(process_num)02d.%(host_node_name)s"
     end
   end
   cmds[:celerybeat] = "celerybeat" if new_resource.celerybeat
