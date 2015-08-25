@@ -1,6 +1,6 @@
 application_python Cookbook (Needle-Cookbooks Fork)
 ===================================================
-This our own fork of the application_python cookbook. We forked it to allow us to change the numprocs and process_name settings for the haystack-celeryd supervisor config.
+Forked to remove the application cookbook lock.
 
 This cookbook is designed to be able to describe and deploy Python web applications. Currently supported:
 
